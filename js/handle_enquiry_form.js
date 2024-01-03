@@ -8,6 +8,11 @@ async function onSubmit(e) {
     const formElement = document.getElementById('getestimate');
     const formData = new FormData(formElement);
 
+    if (!validateForm()) {
+        // Highlighting and validation are handled in validateForm
+        return false;
+    }
+
     try {
         const object = convertFormDataToObject(formData);
         const enquiryResponse = await postEnquiry(object);
@@ -137,5 +142,34 @@ if(targetDiv) {
 } else {
     console.error("Couldn't find the target div to append the success message.");
 }
+}
+
+function validateForm() {
+let isValid = true;
+const formElement = document.getElementById('getestimate');
+const inputs = formElement.querySelectorAll('input, textarea');
+
+inputs.forEach(input => {
+    // Reset styles for all inputs
+    input.style.border = '1px solid #ccc';
+
+    // Check if the input is empty
+    if (input.required && !input.value.trim()) {
+        // Highlight field in red
+        input.style.border = '2px solid red';
+        isValid = false;
+    }
+});
+
+// Check file input separately if needed
+// const fileInput = document.querySelector('[name="upload_imgs[]"]');
+// if (fileInput.files.length === 0) {
+//     fileInput.style.border = '2px solid red';
+//     isValid = false;
+// } else {
+//     fileInput.style.border = '1px solid #ccc';
+// }
+
+return isValid;
 }
 
