@@ -1,12 +1,25 @@
 // ammend this to use live url
+function handle_form(COMPANY_ID){
 const API_ENDPOINT = 'https://enquiry.api.tradetrackr.co.uk'; 
-const COMPANY_ID = '0f40cbf6-3502-4836-b548-37e864eec836';
+
+var imgUpload = document.getElementById('upload_imgs'),
+    imgPreview = document.getElementById('img_preview'),
+    accumulatedFiles = [], // Array to hold all files over time
+    previewTitle = document.createElement('p'),
+    img;
+
 
 async function onSubmit(e) {
     e.preventDefault();
 
     const formElement = document.getElementById('getestimate');
     const formData = new FormData(formElement);
+
+    accumulatedFiles.forEach((file, index) => {
+        // The 'files[]' name should match with the backend expectation for array of files
+        formData.append('upload_imgs[]', file, file.name);
+    });
+
 
     if (!validateForm()) {
         // Highlighting and validation are handled in validateForm
@@ -78,35 +91,62 @@ async function uploadFiles(formData, presignedUrls) {
         }
     }
 }
-
-var imgUpload = document.getElementById('upload_imgs')
-, imgPreview = document.getElementById('img_preview')
-, totalFiles
-, previewTitle
-, previewTitleText
-, img;
-
 imgUpload.addEventListener('change', previewImgs, false);
 
-function previewImgs(event) {
-totalFiles = imgUpload.files.length;
-
-if(!!totalFiles) {
-imgPreview.classList.remove('quote-imgs-thumbs--hidden');
-previewTitle = document.createElement('p');
 previewTitle.style.fontWeight = 'bold';
-previewTitleText = document.createTextNode(totalFiles + ' Total Images Selected');
-previewTitle.appendChild(previewTitleText);
 imgPreview.appendChild(previewTitle);
+
+function fileAlreadyAdded(file, files) {
+
+    let isDuplicate = files.some(f => f.name === file.name && f.size === file.size);
+    
+    return isDuplicate;
 }
 
-for(var i = 0; i < totalFiles; i++) {
-img = document.createElement('img');
-img.src = URL.createObjectURL(event.target.files[i]);
-img.classList.add('img-preview-thumb');
-imgPreview.appendChild(img);
+function previewImgs(event) {
+    // Add the newly selected files to the accumulated files if not already present
+    for (var i = 0; i < imgUpload.files.length; i++) {
+        if (!fileAlreadyAdded(imgUpload.files[i], accumulatedFiles)) {
+            accumulatedFiles.push(imgUpload.files[i]);
+        }
+    }
+
+    // Update totalFiles with the length of accumulatedFiles
+    var totalFiles = accumulatedFiles.length;
+
+    if (!!totalFiles) {
+        imgPreview.classList.remove('quote-imgs-thumbs--hidden');
+        previewTitle.textContent = totalFiles + ' Total Images Selected';
+    } else {
+        imgPreview.classList.add('quote-imgs-thumbs--hidden');
+    }
+
+    console.log("Current children before clearing: ", imgPreview.children.length);
+
+    // We'll collect all children that need to be removed in an array first
+    let childrenToRemove = [];
+    for (let child of imgPreview.children) {
+        if (child !== previewTitle) {
+            childrenToRemove.push(child);
+        }
+    }
+
+    // Now we remove the collected children
+    for (let child of childrenToRemove) {
+        imgPreview.removeChild(child);
+    }
+
+    console.log("Current children after clearing: ", imgPreview.children.length);
+
+    // Add all accumulated files to the preview
+    accumulatedFiles.forEach(function(file) {
+        var img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        img.classList.add('img-preview-thumb');
+        imgPreview.appendChild(img);
+    });
 }
-}
+
 
 function displaySuccessMessage(){
 // Remove the form or hide it
@@ -173,3 +213,4 @@ inputs.forEach(input => {
 return isValid;
 }
 
+}
