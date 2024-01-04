@@ -1,5 +1,5 @@
 // ammend this to use live url
-const API_ENDPOINT = 'http://localhost:6116'; 
+const API_ENDPOINT = 'https://enquiry.api.tradetrackr.co.uk'; 
 const COMPANY_ID = '0f40cbf6-3502-4836-b548-37e864eec836';
 
 async function onSubmit(e) {
