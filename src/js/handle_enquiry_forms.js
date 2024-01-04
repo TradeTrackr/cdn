@@ -1,6 +1,6 @@
 // ammend this to use live url
-function handle_form(COMPANY_ID){
 const API_ENDPOINT = 'https://enquiry.api.tradetrackr.co.uk'; 
+const COMPANY_ID = '0f40cbf6-3502-4836-b548-37e864eec836'; 
 
 var imgUpload = document.getElementById('upload_imgs'),
     imgPreview = document.getElementById('img_preview'),
@@ -213,4 +213,3 @@ inputs.forEach(input => {
 return isValid;
 }
 
-}
