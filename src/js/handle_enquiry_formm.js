@@ -31,7 +31,7 @@ async function onSubmit(e) {
         const enquiryResponse = await postEnquiry(object);
 
         if (enquiryResponse && !enquiryResponse.error && object['photos'].length > 0) {
-            const uploadResponse = await generatePresignedUrl(object);
+            const uploadResponse = await generatePresignedUrl(object, enquiryResponse);
             await uploadFiles(formData, uploadResponse.presigned_urls);
         }
 
@@ -63,11 +63,12 @@ async function postEnquiry(object) {
     return response.json();
 }
 
-async function generatePresignedUrl(object) {
+async function generatePresignedUrl(object, enquiryResponse) {
     const newObject = {
         file_names: object['photos'],
         company_id: COMPANY_ID,
-        fullname: object['full_name']
+        fullname: object['full_name'],
+        enquiry_id: enquiryResponse['id']
     };
 
     const response = await fetch(`${API_ENDPOINT}/generate_presigned_url`, {
