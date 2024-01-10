@@ -155,7 +155,7 @@ document.getElementById('getestimate').style.display = 'none';
 
 // Create a success message element
 var messageDiv = document.createElement('div');
-messageDiv.innerHTML = "<strong>Thank you!</strong> Your request for an estimate has been sent.";
+messageDiv.innerHTML = "<strong>Thank you!</strong> Your request for an estimate has been sent. We will get back to you soon.";
 messageDiv.className = "success-message"; // Add a class for styling
 
 // Select the target div with id 'register-form'
