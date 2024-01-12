@@ -14,7 +14,7 @@ async function onSubmit(e) {
 
     const formElement = document.getElementById('getestimate');
     const formData = new FormData(formElement);
-
+    formData.append('status', 'new')
     accumulatedFiles.forEach((file, index) => {
         // The 'files[]' name should match with the backend expectation for array of files
         formData.append('upload_imgs[]', file, file.name);
