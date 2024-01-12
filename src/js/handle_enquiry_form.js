@@ -64,11 +64,12 @@ async function postEnquiry(object) {
 }
 
 async function generatePresignedUrl(object, enquiryResponse) {
+    console.log(enquiryResponse)
     const newObject = {
         file_names: object['photos'],
         company_id: COMPANY_ID,
         fullname: object['full_name'],
-        enquiry_id: enquiryResponse['id']
+        enquiry_id: enquiryResponse[0]['id']
     };
 
     const response = await fetch(`${API_ENDPOINT}/generate_presigned_url`, {
