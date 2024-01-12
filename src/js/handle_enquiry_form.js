@@ -46,7 +46,9 @@ function convertFormDataToObject(formData) {
     const object = { photos: [], company_id: COMPANY_ID };
     formData.forEach((value, key) => {
         if (key === 'upload_imgs[]') {
-            object['photos'].push(value.name);
+            if (! object['photos'].includes(value.name)){
+                object['photos'].push(value.name);
+            }
         } else {
             object[key] = value;
         }
