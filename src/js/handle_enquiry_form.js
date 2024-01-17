@@ -1,6 +1,7 @@
 // ammend this to use live url
 const API_ENDPOINT = 'https://enquiry.api.tradetrackr.co.uk'; 
-const COMPANY_ID = '0f40cbf6-3502-4836-b548-37e864eec836'; 
+const COMPANY_ID = '0f40cbf6-3502-4836-b548-37e864eec836';
+const COMPANY_EMAIL = 'noreply@homefrontmaintenance.co.uk'
 
 var imgUpload = document.getElementById('upload_imgs'),
     imgPreview = document.getElementById('img_preview'),
@@ -43,7 +44,7 @@ async function onSubmit(e) {
 }
 
 function convertFormDataToObject(formData) {
-    const object = { photos: [], company_id: COMPANY_ID };
+    const object = { photos: [], company_id: COMPANY_ID, company_email: COMPANY_EMAIL };
     formData.forEach((value, key) => {
         if (key === 'upload_imgs[]') {
             if (! object['photos'].includes(value.name)){
