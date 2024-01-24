@@ -1,6 +1,5 @@
-// ammend this to use live url
-const API_ENDPOINT = 'https://enquiry.api.tradetrackr.co.uk'; 
-const COMPANY_ID = '0f40cbf6-3502-4836-b548-37e864eec836';
+const API_ENDPOINT =  'http://localhost:6116';
+const COMPANY_ID = '0db75150-bc17-4c96-b1f3-1f15c498472d';
 
 var imgUpload = document.getElementById('upload_imgs'),
     imgPreview = document.getElementById('img_preview'),
@@ -66,7 +65,6 @@ async function postEnquiry(object) {
 }
 
 async function generatePresignedUrl(object, enquiryResponse) {
-    console.log(enquiryResponse)
     const newObject = {
         file_names: object['photos'],
         company_id: COMPANY_ID,
@@ -84,7 +82,6 @@ async function generatePresignedUrl(object, enquiryResponse) {
 
 async function uploadFiles(formData, presignedUrls) {
     const files = formData.getAll('upload_imgs[]');
-
     for (const urlInfo of presignedUrls) {
         const file = files.find(f => f.name === urlInfo.file_name);
         if (file) {
@@ -163,7 +160,9 @@ messageDiv.className = "success-message"; // Add a class for styling
 
 // Select the target div with id 'register-form'
 var targetDiv = document.getElementById('register-form');
-
+document.getElementById('register-form').scrollIntoView({
+    behavior: 'smooth'
+});
 // Append the success message to the 'register-form' div
 if(targetDiv) {
     targetDiv.appendChild(messageDiv);
@@ -216,4 +215,3 @@ inputs.forEach(input => {
 
 return isValid;
 }
-
