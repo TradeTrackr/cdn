@@ -56,8 +56,11 @@ input:invalid {
   border: 2px solid red;
 }
 
-body {
+body #login {
   background-color: var(--colour1);
+}
+body #app {
+  background-color: #fbfbfb;
 }
 @media (min-width: 991.98px) {
   main {
