@@ -57,10 +57,10 @@ input:invalid {
 }
 
 body #login {
-  background-color: var(--colour1);
+  background-color: var(--colour1)!important;
 }
 body #app {
-  background-color: #fbfbfb;
+  background-color: #fbfbfb!important;
 }
 @media (min-width: 991.98px) {
   main {
