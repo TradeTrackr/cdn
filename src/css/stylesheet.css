@@ -13,7 +13,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 :root {
-  --colour1: #9A616D;
+  --colour1: #2d5c99;
   --body_color: white;
   --loginlogowidth: 56%;
   --loginlogoheight: 50px;
@@ -56,10 +56,11 @@ input:invalid {
   border: 2px solid red;
 }
 
-body #login {
+body#login {
+
   background-color: var(--colour1)!important;
 }
-body #app {
+body#app {
   background-color: #fbfbfb!important;
 }
 @media (min-width: 991.98px) {
