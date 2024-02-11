@@ -1,4 +1,4 @@
-const API_ENDPOINT = 'https://enquiry.api.tradetrackr.co.uk'; 
+const API_ENDPOINT = 'https://api.tradetrackr.co.uk'; 
 const COMPANY_ID = '0db75150-bc17-4c96-b1f3-1f15c498472d';
 
 var imgUpload = document.getElementById('upload_imgs'),
