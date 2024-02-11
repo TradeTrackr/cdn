@@ -56,11 +56,11 @@ input:invalid {
   border: 2px solid red;
 }
 
-body#login {
+#loginbody {
 
   background-color: var(--colour1)!important;
 }
-body#app {
+#appbody {
   background-color: #fbfbfb!important;
 }
 
