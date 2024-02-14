@@ -29,7 +29,7 @@ current_host = window.location.host
 
 	function load_style_from_api(){
 		Http = new XMLHttpRequest();
-		url= current_protocol + "//" + current_host + "/api/style/get_style?url=" + current_host;
+		url= "https://style.tradetrackr.co.uk/api/style/get_style?url=" + current_host;
 		Http.open("GET", url);
 		Http.send();
 
