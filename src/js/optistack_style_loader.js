@@ -28,19 +28,26 @@ current_host = window.location.host
 	}
 
 	function load_style_from_api(){
-		Http = new XMLHttpRequest();
-		url= "https://style.tradetrackr.co.uk/api/style/get_style?url=" + current_host;
-		Http.open("GET", url);
-		Http.send();
-
-		Http.onreadystatechange = (e) => {
-		  if(Http.readyState === Http.DONE) {
-		    response = JSON.parse(Http.responseText)
-		    store_style_in_cookie(response)
-		    change_style(response)
-		  }
+	    var Http = new XMLHttpRequest();
+	    var url = "https://style.tradetrackr.co.uk/api/style/get_style?url=" + current_host;
+	    Http.open("GET", url);
+	    Http.send();
+	
+	    Http.onreadystatechange = (e) => {
+		// Check if the request is completed and was successful
+		if(Http.readyState === XMLHttpRequest.DONE && Http.status === 200) {
+		    try {
+			var response = JSON.parse(Http.responseText);
+			store_style_in_cookie(response);
+			change_style(response);
+		    } catch (error) {
+			console.error("Error parsing JSON response: ", error);
+			// Handle the error (e.g., show an error message to the user)
+		    }
 		}
+	    }
 	}
+
 
 	function change_style(style_values) {
 		active_style_values = style_values
