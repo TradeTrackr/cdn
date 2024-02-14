@@ -96,6 +96,7 @@ current_host = window.location.host
 		}
 
 		try {
+			console.log(logo_url)
 			document.getElementById("logo").src = logo_url
         }
         catch(err) {
