@@ -28,6 +28,12 @@
 
 }
 
+@media (max-width: 349px) {
+  #logo{
+    height:20px;
+  }
+}
+
 /* Spinner Overlay */
 .spinner-overlay {
   position: fixed; /* Full screen */
