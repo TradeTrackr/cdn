@@ -8,6 +8,20 @@ var imgUpload = document.getElementById('upload_imgs'),
     img;
 
 
+function getCurrentDateTime() {
+  let now = new Date();
+
+  let year = now.getFullYear();
+  let month = ('0' + (now.getMonth() + 1)).slice(-2);
+  let day = ('0' + now.getDate()).slice(-2);
+  let hours = ('0' + now.getHours()).slice(-2);
+  let minutes = ('0' + now.getMinutes()).slice(-2);
+  let seconds = ('0' + now.getSeconds()).slice(-2);
+  let milliseconds = ('00' + now.getMilliseconds()).slice(-3);
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
+}
+
 async function onSubmit(e) {
     e.preventDefault();
 
@@ -15,6 +29,7 @@ async function onSubmit(e) {
     const formData = new FormData(formElement);
     formData.append('status', 'new')
     formData.append('type', 'website')
+    formData.append('timestamp', getCurrentDateTime())
     accumulatedFiles.forEach((file, index) => {
         // The 'files[]' name should match with the backend expectation for array of files
         formData.append('upload_imgs[]', file, file.name);
